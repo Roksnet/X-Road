@@ -90,8 +90,9 @@ public class NeomCertificateProfileInfoProviderTest {
                 new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER_O, "NSX-DEV")
                         .setReadOnly(true),
 
-                new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BIZ, "ORG")
-                        .setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BIZ,
+                        "ORG"
+                        ).setReadOnly(true),
                 
                 new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
                         "00000001"
