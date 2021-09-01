@@ -55,7 +55,8 @@ public class NeomCertificateProfileInfoProviderTest {
                 "Must return instance of NeomAuthCertificateProfileInfo",
                 provider.getAuthCertProfile(
                         new AuthCertificateProfileInfoParameters(
-                                SecurityServerId.create("XX", "foo", "bar", "server"), "foo"
+                                /*SecurityServerId.create("XX", "foo", "bar", "server"), "foo"*/
+                                SecurityServerId.create("NSX-DEV", "ORG", "00000001", "management-server"), "OPERATOR"
                         )
                 ) instanceof NeomAuthCertificateProfileInfo
         );
@@ -64,8 +65,10 @@ public class NeomCertificateProfileInfoProviderTest {
                 "Must return instance of NeomSignCertificateProfileInfo",
                 provider.getSignCertProfile(
                         new SignCertificateProfileInfoParameters(
-                                SecurityServerId.create("XX", "foo", "bar", "server"),
-                                ClientId.create("XX", "foo", "bar"), "foo"
+                                /*SecurityServerId.create("XX", "foo", "bar", "server"),*/
+                                SecurityServerId.create("NSX-DEV", "ORG", "00000001", "management-server"),
+                                /*ClientId.create("XX", "foo", "bar"), "foo"*/
+                                ClientId.create("NSX-DEV", "ORG", "00000001"), "OPERATOR"
                         )
                 ) instanceof NeomSignCertificateProfileInfo
         );
@@ -85,7 +88,7 @@ public class NeomCertificateProfileInfoProviderTest {
                 new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
                         .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
-                        "00000000"
+                        "00000001"
                         ).setReadOnly(true),
                 
         };
@@ -178,7 +181,7 @@ public class NeomCertificateProfileInfoProviderTest {
                         .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, "")
                         .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE, "server")
+                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE, "management-server")
                         .setReadOnly(true),
         };
 
