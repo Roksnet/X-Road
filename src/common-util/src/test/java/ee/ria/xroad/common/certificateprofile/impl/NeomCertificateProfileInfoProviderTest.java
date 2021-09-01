@@ -181,8 +181,9 @@ public class NeomCertificateProfileInfoProviderTest {
                         .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, "")
                         .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE, "management-server")
-                        .setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE, 
+                        "management-server"
+                        ).setReadOnly(true),
         };
 
         assertTrue(
