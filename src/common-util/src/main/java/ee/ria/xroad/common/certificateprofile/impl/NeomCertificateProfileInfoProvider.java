@@ -23,30 +23,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package ee.ria.xroad.common.certificateprofile.impl;
 
 import ee.ria.xroad.common.certificateprofile.AuthCertificateProfileInfo;
 import ee.ria.xroad.common.certificateprofile.CertificateProfileInfoProvider;
 import ee.ria.xroad.common.certificateprofile.SignCertificateProfileInfo;
 
-
 /**
  * Neom implementation of CertificateProfileInfoProvider.
  */
-public class NeomCertificateProfileInfoProvider 
-        implements CertificateProfileInfoProvider {
+public class NeomCertificateProfileInfoProvider implements CertificateProfileInfoProvider {
 
     @Override
-    public AuthCertificateProfileInfo getAuthCertProfile(
-            AuthCertificateProfileInfo.Parameters params) {
+    public AuthCertificateProfileInfo getAuthCertProfile(AuthCertificateProfileInfo.Parameters params) {
         return new EjbcaAuthCertificateProfileInfo(params);
     }
 
     @Override
-    public SignCertificateProfileInfo getSignCertProfile(
-            SignCertificateProfileInfo.Parameters params) {
+    public SignCertificateProfileInfo getSignCertProfile(SignCertificateProfileInfo.Parameters params) {
         return new EjbcaSignCertificateProfileInfo(params);
     }
-    
+
 }

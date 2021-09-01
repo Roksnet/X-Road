@@ -29,32 +29,28 @@ package ee.ria.xroad.common.certificateprofile.impl;
 import ee.ria.xroad.common.certificateprofile.AuthCertificateProfileInfo;
 import ee.ria.xroad.common.certificateprofile.DnFieldDescription;
 
-public class NeomAuthCertificateProfileInfo 
-        extends AbstractCertificateProfileInfo
+public class NeomAuthCertificateProfileInfo extends AbstractCertificateProfileInfo
         implements AuthCertificateProfileInfo {
 
     /**
      * Constructor.
+     * 
      * @param params the parameters
      */
     public NeomAuthCertificateProfileInfo(Parameters params) {
         super(new DnFieldDescription[] {
 
                 // Country Code
-                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE,
-                        ""
-                ).setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
+                        .setReadOnly(true),
 
                 // Organization name
-                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME,
-                        ""
-                ).setReadOnly(false),
+                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, "")
+                        .setReadOnly(false),
 
                 // Server code
                 new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE,
-                    params.getServerId().getServerCode()
-                ).setReadOnly(true) }
-        );
+                        params.getServerId().getServerCode()).setReadOnly(true) });
     }
-    
+
 }

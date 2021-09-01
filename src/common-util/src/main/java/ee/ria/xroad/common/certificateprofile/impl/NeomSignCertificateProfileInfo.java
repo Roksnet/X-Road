@@ -33,46 +33,42 @@ import ee.ria.xroad.common.util.CertUtils;
 
 import java.security.cert.X509Certificate;
 
-public class NeomSignCertificateProfileInfo
-        extends AbstractCertificateProfileInfo
+public class NeomSignCertificateProfileInfo extends AbstractCertificateProfileInfo
         implements SignCertificateProfileInfo {
 
     protected final Parameters params;
 
     /**
      * Constructor.
+     * 
      * @param params the parameters
      */
     public NeomSignCertificateProfileInfo(Parameters params) {
         super(new DnFieldDescription[] {
 
-
-                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, 
-                        ""
-                ).setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, "")
+                        .setReadOnly(true),
 
                 // Country Code
-                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE,
-                        ""
-                ).setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
+                        .setReadOnly(true),
 
                 // Organization name
-                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME,
-                        ""
-                ).setReadOnly(false),
+                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, "")
+                        .setReadOnly(false),
 
                 // Serial number
                 new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.SERIAL_NUMBER,
-                    params.getClientId().getMemberCode()
-                ).setReadOnly(true) }
+                        params.getClientId().getMemberCode()).setReadOnly(true) }
 
         );
 
         this.params = params;
     }
+
     @Override
     public ClientId getSubjectIdentifier(X509Certificate certificate) {
         return CertUtils.getSubjectClientId(certificate);
     }
-    
+
 }
