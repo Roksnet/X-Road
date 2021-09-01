@@ -83,7 +83,7 @@ public class NeomCertificateProfileInfoProviderTest {
                         .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "XX")
                         .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE, 
+                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE,
                         "XX/server/Foo"
                         ).setReadOnly(true),
                 
