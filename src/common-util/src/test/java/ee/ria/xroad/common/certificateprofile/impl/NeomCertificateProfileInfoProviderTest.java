@@ -158,7 +158,7 @@ public class NeomCertificateProfileInfoProviderTest {
     public void signProfileGetSubjectIdentifier() {
         X509Certificate mockCert = Mockito.mock(X509Certificate.class);
         Mockito.when(mockCert.getSubjectX500Principal()).thenReturn(
-                new X500Principal("C=XX, O=Foo, CN=bar")
+                new X500Principal("C=XX, O=Foo, CN=bar serialNumber=0000")
         );
 
         assertEquals(
@@ -197,7 +197,7 @@ public class NeomCertificateProfileInfoProviderTest {
     @Test
     public void authProfileValidateFieldSuccessfully() throws Exception {
         getAuthProfile().validateSubjectField(
-                new DnFieldValueImpl("C", "XX")
+                new DnFieldValueImpl("C", "YY")
         );
     }
 
@@ -253,8 +253,9 @@ public class NeomCertificateProfileInfoProviderTest {
     private NeomSignCertificateProfileInfo getSignProfile() {
         return new NeomSignCertificateProfileInfo(
                 new SignCertificateProfileInfoParameters(
-                        ClientId.create("XX", "foo", "bar"),
-                        "foo"
+                        SecurityServerId.create("YY", "COM", "OWNER", "server"),
+                        ClientId.create("XX", "ORG", "CLIENT"),
+                        "client"
                 )
         );
     }
@@ -263,7 +264,7 @@ public class NeomCertificateProfileInfoProviderTest {
         return new NeomAuthCertificateProfileInfo(
                 new AuthCertificateProfileInfoParameters(
                         SecurityServerId.create("XX", "foo", "bar", "server"),
-                        "foo"
+                        "owner"
                 )
         );
     }
