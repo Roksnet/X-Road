@@ -46,7 +46,7 @@ public class NeomSignCertificateProfileInfo extends AbstractCertificateProfileIn
     public NeomSignCertificateProfileInfo(Parameters params) {
         super(new DnFieldDescription[] {
 
-                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, "")
+                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.ORGANIZATION_NAME_CN, "")
                         .setReadOnly(true),
 
                 // Country Code
@@ -58,7 +58,7 @@ public class NeomSignCertificateProfileInfo extends AbstractCertificateProfileIn
                         .setReadOnly(false),
 
                 // Serial number
-                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.SERIAL_NUMBER,
+                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.SERIAL_NUMBER_SN,
                         params.getClientId().getMemberCode()).setReadOnly(true) }
 
         );
