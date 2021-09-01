@@ -51,14 +51,23 @@ public class NeomCertificateProfileInfoProviderTest {
     @Test
     public void providerReturnsCorrectImplementations() {
         CertificateProfileInfoProvider provider = provider();
-        assertTrue("Must return instance of DefaultAuthCertificateProfileInfo",
+        assertTrue(
+                "Must return instance of DefaultAuthCertificateProfileInfo",
                 provider.getAuthCertProfile(
-                        new AuthCertificateProfileInfoParameters(SecurityServerId.create("XX", "foo", "bar", "server"),
-                                "foo")) instanceof NeomAuthCertificateProfileInfo);
+                        new AuthCertificateProfileInfoParameters(
+                                SecurityServerId.create("XX", "foo", "bar", "server"), "foo"
+                        )
+                ) instanceof NeomAuthCertificateProfileInfo
+        );
 
-        assertTrue("Must return instance of DefaultSignCertificateProfileInfo",
-                provider.getSignCertProfile(new SignCertificateProfileInfoParameters(
-                        ClientId.create("XX", "foo", "bar"), "foo")) instanceof NeomSignCertificateProfileInfo);
+        assertTrue(
+                "Must return instance of DefaultSignCertificateProfileInfo",
+                provider.getSignCertProfile(
+                        new SignCertificateProfileInfoParameters(
+                                ClientId.create("XX", "foo", "bar"), "foo"
+                        )
+                ) instanceof NeomSignCertificateProfileInfo
+        );
     }
 
     /**
@@ -74,12 +83,15 @@ public class NeomCertificateProfileInfoProviderTest {
                         .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "XX")
                         .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE,
-                        "XX/server/Foo").setReadOnly(true),
-
+                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE, "XX/server/Foo")
+                        .setReadOnly(true),
+                
         };
 
-        assertTrue("Did not get expected fields", Arrays.areEqual(expectedFields, getSignProfile().getSubjectFields()));
+        assertTrue(
+                "Did not get expected fields",
+                Arrays.areEqual(expectedFields, getSignProfile().getSubjectFields())
+        );
     }
 
     /**
@@ -89,7 +101,9 @@ public class NeomCertificateProfileInfoProviderTest {
      */
     @Test
     public void signProfileValidateFieldSuccessfully() throws Exception {
-        getSignProfile().validateSubjectField(new DnFieldValueImpl("C", "XX"));
+        getSignProfile().validateSubjectField(
+                new DnFieldValueImpl("C", "XX")
+        );
     }
 
     /**
@@ -99,18 +113,22 @@ public class NeomCertificateProfileInfoProviderTest {
      */
     @Test(expected = Exception.class)
     public void signProfileFailToValidateUnknownField() throws Exception {
-        getSignProfile().validateSubjectField(new DnFieldValueImpl("X", "foo"));
+        getSignProfile().validateSubjectField(
+                new DnFieldValueImpl("X", "foo")
+        );
     }
 
     /**
-     * Tests whether validating blank subject field of sign profile fails as
-     * expected.
+     * Tests whether validating blank subject field of sign profile fails
+     * as expected.
      *
      * @throws Exception in case of any unexpected errors
      */
     @Test(expected = Exception.class)
     public void signProfileFailToValidateBlankField() throws Exception {
-        getSignProfile().validateSubjectField(new DnFieldValueImpl("O", ""));
+        getSignProfile().validateSubjectField(
+                new DnFieldValueImpl("O", "")
+        );
     }
 
     /**
@@ -118,25 +136,38 @@ public class NeomCertificateProfileInfoProviderTest {
      */
     @Test
     public void signProfileCreateSubjectDn() {
-        assertEquals(new X500Principal("C=foo, O=bar, CN=baz"),
-                getSignProfile().createSubjectDn(new DnFieldValue[] { new DnFieldValueImpl("C", "foo"),
-                        new DnFieldValueImpl("O", "bar"), new DnFieldValueImpl("CN", "baz") }));
+        assertEquals(
+                new X500Principal("C=foo, O=bar, CN=baz"),
+                getSignProfile().createSubjectDn(
+                        new DnFieldValue[] {
+                                new DnFieldValueImpl("C", "foo"),
+                                new DnFieldValueImpl("O", "bar"),
+                                new DnFieldValueImpl("CN", "baz")
+                        }
+                )
+        );
     }
 
     /**
-     * Tests whether getting subject identifier of sign profile succeeds as
-     * expected.
+     * Tests whether getting subject identifier of sign profile succeeds
+     * as expected.
      */
     @Test
     public void signProfileGetSubjectIdentifier() {
         X509Certificate mockCert = Mockito.mock(X509Certificate.class);
-        Mockito.when(mockCert.getSubjectX500Principal()).thenReturn(new X500Principal("C=XX, O=Foo, CN=bar"));
+        Mockito.when(mockCert.getSubjectX500Principal()).thenReturn(
+                new X500Principal("C=XX, O=Foo, CN=bar")
+        );
 
-        assertEquals(ClientId.create("XX", "Foo", "bar"), getSignProfile().getSubjectIdentifier(mockCert));
+        assertEquals(
+                ClientId.create("XX", "Foo", "bar"),
+                getSignProfile().getSubjectIdentifier(mockCert)
+        );
     }
 
     /**
-     * Tests whether getting expected fields of auth profile succeeds as expected.
+     * Tests whether getting expected fields of auth profile succeeds
+     * as expected.
      */
     @Test
     public void authProfileSubjectFields() {
@@ -146,42 +177,52 @@ public class NeomCertificateProfileInfoProviderTest {
                 new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, "")
                         .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE, "server")
-                        .setReadOnly(true), };
+                        .setReadOnly(true),
+        };
 
-        assertTrue("Did not get expected fields", Arrays.areEqual(expectedFields, getAuthProfile().getSubjectFields()));
+        assertTrue(
+                "Did not get expected fields",
+                Arrays.areEqual(expectedFields, getAuthProfile().getSubjectFields())
+        );
     }
 
     /**
-     * Tests whether validating correct subject field of auth profile succeeds as
-     * expected.
+     * Tests whether validating correct subject field of auth profile succeeds
+     * as expected.
      *
      * @throws Exception in case of any unexpected errors
      */
     @Test
     public void authProfileValidateFieldSuccessfully() throws Exception {
-        getAuthProfile().validateSubjectField(new DnFieldValueImpl("C", "XX"));
+        getAuthProfile().validateSubjectField(
+                new DnFieldValueImpl("C", "XX")
+        );
     }
 
     /**
-     * Tests whether validating unknown subject field of auth profile fails as
-     * expected.
+     * Tests whether validating unknown subject field of auth profile fails
+     * as expected.
      *
      * @throws Exception in case of any unexpected errors
      */
     @Test(expected = Exception.class)
     public void authProfileFailToValidateUnknownField() throws Exception {
-        getAuthProfile().validateSubjectField(new DnFieldValueImpl("X", "foo"));
+        getAuthProfile().validateSubjectField(
+                new DnFieldValueImpl("X", "foo")
+        );
     }
 
     /**
-     * Tests whether validating blank subject field of auth profile fails as
-     * expected.
+     * Tests whether validating blank subject field of auth profile fails
+     * as expected.
      *
      * @throws Exception in case of any unexpected errors
      */
     @Test(expected = Exception.class)
     public void authProfileFailToValidateBlankField() throws Exception {
-        getAuthProfile().validateSubjectField(new DnFieldValueImpl("O", ""));
+        getAuthProfile().validateSubjectField(
+                new DnFieldValueImpl("O", "")
+        );
     }
 
     /**
@@ -189,9 +230,16 @@ public class NeomCertificateProfileInfoProviderTest {
      */
     @Test
     public void authProfileCreateSubjectDn() {
-        assertEquals(new X500Principal("C=XX, O=foo, CN=baz"),
-                getAuthProfile().createSubjectDn(new DnFieldValue[] { new DnFieldValueImpl("C", "XX"),
-                        new DnFieldValueImpl("O", "foo"), new DnFieldValueImpl("CN", "baz") }));
+        assertEquals(
+                new X500Principal("C=XX, O=foo, CN=baz"),
+                getAuthProfile().createSubjectDn(
+                        new DnFieldValue[] {
+                                new DnFieldValueImpl("C", "XX"),
+                                new DnFieldValueImpl("O", "foo"),
+                                new DnFieldValueImpl("CN", "baz")
+                        }
+                )
+        );
     }
 
     // ------------------------------------------------------------------------
@@ -202,12 +250,20 @@ public class NeomCertificateProfileInfoProviderTest {
 
     private NeomSignCertificateProfileInfo getSignProfile() {
         return new NeomSignCertificateProfileInfo(
-                new SignCertificateProfileInfoParameters(ClientId.create("XX", "foo", "bar"), "foo"));
+                new SignCertificateProfileInfoParameters(
+                        ClientId.create("XX", "foo", "bar"),
+                        "foo"
+                )
+        );
     }
 
     private NeomAuthCertificateProfileInfo getAuthProfile() {
         return new NeomAuthCertificateProfileInfo(
-                new AuthCertificateProfileInfoParameters(SecurityServerId.create("XX", "foo", "bar", "server"), "foo"));
+                new AuthCertificateProfileInfoParameters(
+                        SecurityServerId.create("XX", "foo", "bar", "server"),
+                        "foo"
+                )
+        );
     }
-
+    
 }
