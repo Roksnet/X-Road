@@ -35,6 +35,7 @@ public enum DnFieldLabelLocalizationKey {
     INSTANCE_IDENTIFIER_O("Instance Identifier (O)"),
     MEMBER_CLASS("Member Class (O)"),
     MEMBER_CLASS_OU("Member Class (OU)"),
+    MEMBER_CLASS_BIZ("Business Category (businessCategory)"),
     MEMBER_CODE("Member Code (CN)"),
     MEMBER_CODE_SN("Member Code (SN)"),
     ORGANIZATION_NAME("Organization Name (O)"),

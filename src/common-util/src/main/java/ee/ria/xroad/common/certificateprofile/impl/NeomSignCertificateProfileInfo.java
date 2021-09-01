@@ -53,12 +53,18 @@ public class NeomSignCertificateProfileInfo extends AbstractCertificateProfileIn
                 new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
                         .setReadOnly(true),
 
-                // Organization name
-                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, "")
+                // Instance
+                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER_O,
+                        params.getClientId().getXRoadInstance())
+                        .setReadOnly(false),
+
+                // Organization type
+                new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BIZ,
+                        params.getClientId().getMemberClass())
                         .setReadOnly(false),
 
                 // Serial number
-                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.SERIAL_NUMBER_SN,
+                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
                         params.getClientId().getMemberCode()).setReadOnly(true) }
 
         );
