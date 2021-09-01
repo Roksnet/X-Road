@@ -52,7 +52,7 @@ public class NeomCertificateProfileInfoProviderTest {
     public void providerReturnsCorrectImplementations() {
         CertificateProfileInfoProvider provider = provider();
         assertTrue(
-                "Must return instance of DefaultAuthCertificateProfileInfo",
+                "Must return instance of NeomAuthCertificateProfileInfo",
                 provider.getAuthCertProfile(
                         new AuthCertificateProfileInfoParameters(
                                 SecurityServerId.create("XX", "foo", "bar", "server"), "foo"
@@ -61,9 +61,10 @@ public class NeomCertificateProfileInfoProviderTest {
         );
 
         assertTrue(
-                "Must return instance of DefaultSignCertificateProfileInfo",
+                "Must return instance of NeomSignCertificateProfileInfo",
                 provider.getSignCertProfile(
                         new SignCertificateProfileInfoParameters(
+                                SecurityServerId.create("XX", "foo", "bar", "server"),
                                 ClientId.create("XX", "foo", "bar"), "foo"
                         )
                 ) instanceof NeomSignCertificateProfileInfo
@@ -77,14 +78,14 @@ public class NeomCertificateProfileInfoProviderTest {
     @Test
     public void signProfileSubjectFields() {
         DnFieldDescription[] expectedFields = {
-                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, "bar")
+                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.ORGANIZATION_NAME_CN, "bar")
                         .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, "")
                         .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "XX")
                         .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE,
-                        "XX/server/Foo"
+                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
+                        "00000000"
                         ).setReadOnly(true),
                 
         };
