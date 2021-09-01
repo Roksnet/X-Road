@@ -66,7 +66,7 @@ public class NeomCertificateProfileInfoProviderTest {
                 provider.getSignCertProfile(
                         new SignCertificateProfileInfoParameters(
                                 /*SecurityServerId.create("XX", "foo", "bar", "server"),*/
-                                SecurityServerId.create("NSX-DEV", "ORG", "00000001", "management-server"),
+                                //SecurityServerId.create("NSX-DEV", "ORG", "00000001", "management-server"),
                                 /*ClientId.create("XX", "foo", "bar"), "foo"*/
                                 ClientId.create("NSX-DEV", "ORG", "00000001"), "OPERATOR"
                         )
@@ -258,7 +258,7 @@ public class NeomCertificateProfileInfoProviderTest {
         return new NeomSignCertificateProfileInfo(
                 new SignCertificateProfileInfoParameters(
                         /*SecurityServerId.create("YY", "COM", "OWNER", "server"),*/
-                        SecurityServerId.create("NSX-DEV", "ORG", "00000001", "management-server"),
+                        //SecurityServerId.create("NSX-DEV", "ORG", "00000001", "management-server"),
                         /*ClientId.create("XX", "ORG", "CLIENT"),
                         "client"*/
                         ClientId.create("NSX-DEV", "ORG", "00000001"), "OPERATOR"
