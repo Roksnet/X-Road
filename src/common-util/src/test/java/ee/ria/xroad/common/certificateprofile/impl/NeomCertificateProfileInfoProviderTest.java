@@ -164,7 +164,7 @@ public class NeomCertificateProfileInfoProviderTest {
     public void signProfileGetSubjectIdentifier() {
         X509Certificate mockCert = Mockito.mock(X509Certificate.class);
         Mockito.when(mockCert.getSubjectX500Principal()).thenReturn(
-                new X500Principal("O=XX, businessCategory=Foo, serialNumber=bar")
+                new X500Principal("C=YY, CN=abc, O=XX, businessCategory=Foo, serialNumber=bar")
         );
 
         assertEquals(
