@@ -94,11 +94,11 @@ public class NeomCertificateProfileInfoProviderTest {
                         "bar"
                         ).setReadOnly(true),*/
 
-                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER, "XX")
+                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER, "XX")
                         .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.MEMBER_CLASS, "foo")
+                new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BIZ, "foo")
                         .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.MEMBER_CODE, "bar")
+                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN, "bar")
                         .setReadOnly(true)
                 
         };
@@ -117,7 +117,7 @@ public class NeomCertificateProfileInfoProviderTest {
     @Test
     public void signProfileValidateFieldSuccessfully() throws Exception {
         getSignProfile().validateSubjectField(
-                new DnFieldValueImpl("C", "XX")
+                new DnFieldValueImpl("O", "XX")
         );
     }
 
@@ -142,7 +142,7 @@ public class NeomCertificateProfileInfoProviderTest {
     @Test(expected = Exception.class)
     public void signProfileFailToValidateBlankField() throws Exception {
         getSignProfile().validateSubjectField(
-                new DnFieldValueImpl("O", "")
+                new DnFieldValueImpl("serialNumber", "")
         );
     }
 
@@ -152,12 +152,12 @@ public class NeomCertificateProfileInfoProviderTest {
     @Test
     public void signProfileCreateSubjectDn() {
         assertEquals(
-                new X500Principal("C=foo, O=bar, CN=baz"),
+                new X500Principal("O=foo, businessCategory=bar, serialNumber=baz"),
                 getSignProfile().createSubjectDn(
                         new DnFieldValue[] {
-                                new DnFieldValueImpl("C", "foo"),
-                                new DnFieldValueImpl("O", "bar"),
-                                new DnFieldValueImpl("CN", "baz")
+                                new DnFieldValueImpl("O", "foo"),
+                                new DnFieldValueImpl("businessCategory", "bar"),
+                                new DnFieldValueImpl("serialNumber", "baz")
                         }
                 )
         );
@@ -171,7 +171,7 @@ public class NeomCertificateProfileInfoProviderTest {
     public void signProfileGetSubjectIdentifier() {
         X509Certificate mockCert = Mockito.mock(X509Certificate.class);
         Mockito.when(mockCert.getSubjectX500Principal()).thenReturn(
-                new X500Principal("C=XX, O=Foo, CN=bar")
+                new X500Principal("O=XX, businessCategory=Foo, serialNumber=bar")
         );
 
         assertEquals(
