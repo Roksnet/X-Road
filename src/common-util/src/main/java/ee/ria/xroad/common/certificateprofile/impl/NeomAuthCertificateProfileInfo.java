@@ -51,11 +51,18 @@ public class NeomAuthCertificateProfileInfo extends AbstractCertificateProfileIn
 
                 // Member code
                 new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN, "")
-                        .setReadOnly(true),
+                        .setReadOnly(true),*/
+
+                // Instance identifier
+                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER,
+                    params.getServerId().getXRoadInstance()
+                ).setReadOnly(true),
 
                 // Server code
                 new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE,
-                        params.getServerId().getServerCode()).setReadOnly(true) });*/
+                        params.getServerId().getServerCode()).setReadOnly(true) });
+
+
     }
 
 }
