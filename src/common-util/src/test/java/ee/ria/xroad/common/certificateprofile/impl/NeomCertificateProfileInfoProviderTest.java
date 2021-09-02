@@ -83,7 +83,7 @@ public class NeomCertificateProfileInfoProviderTest {
                 /*new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
                         .setReadOnly(true),*/
 
-                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER_O, "XX")
+                /*new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER_O, "XX")
                         .setReadOnly(true),
 
                 new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BIZ,
@@ -92,7 +92,14 @@ public class NeomCertificateProfileInfoProviderTest {
                 
                 new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
                         "bar"
-                        ).setReadOnly(true),
+                        ).setReadOnly(true),*/
+
+                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER, "XX")
+                        .setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.MEMBER_CLASS, "foo")
+                        .setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.MEMBER_CODE, "bar")
+                        .setReadOnly(true)
                 
         };
 
@@ -164,7 +171,7 @@ public class NeomCertificateProfileInfoProviderTest {
     public void signProfileGetSubjectIdentifier() {
         X509Certificate mockCert = Mockito.mock(X509Certificate.class);
         Mockito.when(mockCert.getSubjectX500Principal()).thenReturn(
-                new X500Principal("C=YY, CN=abc, O=XX, businessCategory=Foo, serialNumber=bar")
+                new X500Principal("C=XX, O=Foo, CN=bar")
         );
 
         assertEquals(
@@ -181,14 +188,18 @@ public class NeomCertificateProfileInfoProviderTest {
     public void authProfileSubjectFields() {
         DnFieldDescription[] expectedFields = {
                 /*new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
-                        .setReadOnly(true),*/
+                        .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER_O, "XX")
                         .setReadOnly(true),
-                /*new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN, "")
-                        .setReadOnly(true),*/
+                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN, "")
+                        .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE,
                         "server"
-                        ).setReadOnly(true),
+                        ).setReadOnly(true),*/
+                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER, "XX")
+                        .setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE, "server")
+                        .setReadOnly(true),
         };
 
         assertTrue(
@@ -206,7 +217,7 @@ public class NeomCertificateProfileInfoProviderTest {
     @Test
     public void authProfileValidateFieldSuccessfully() throws Exception {
         getAuthProfile().validateSubjectField(
-                new DnFieldValueImpl("O", "YY")
+                new DnFieldValueImpl("C", "XX")
         );
     }
 
@@ -219,7 +230,7 @@ public class NeomCertificateProfileInfoProviderTest {
     @Test(expected = Exception.class)
     public void authProfileFailToValidateUnknownField() throws Exception {
         getAuthProfile().validateSubjectField(
-                new DnFieldValueImpl("X", "XX")
+                new DnFieldValueImpl("O", "foo")
         );
     }
 
@@ -232,7 +243,7 @@ public class NeomCertificateProfileInfoProviderTest {
     @Test(expected = Exception.class)
     public void authProfileFailToValidateBlankField() throws Exception {
         getAuthProfile().validateSubjectField(
-                new DnFieldValueImpl("O", "")
+                new DnFieldValueImpl("CN", "")
         );
     }
 

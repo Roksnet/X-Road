@@ -41,7 +41,7 @@ public class NeomAuthCertificateProfileInfo extends AbstractCertificateProfileIn
         super(new DnFieldDescription[] {
 
                 // Country Code
-                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
+                /*new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
                         .setReadOnly(true),
 
                 // Instance
@@ -55,7 +55,7 @@ public class NeomAuthCertificateProfileInfo extends AbstractCertificateProfileIn
 
                 // Server code
                 new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE,
-                        params.getServerId().getServerCode()).setReadOnly(true) });
+                        params.getServerId().getServerCode()).setReadOnly(true) });*/
     }
 
 }
