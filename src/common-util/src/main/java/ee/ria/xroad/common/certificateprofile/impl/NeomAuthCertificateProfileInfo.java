@@ -41,20 +41,15 @@ public class NeomAuthCertificateProfileInfo extends AbstractCertificateProfileIn
         super(new DnFieldDescription[] {
 
                 // Country Code
-                /*new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
+                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
                         .setReadOnly(true),
-
-                // Instance
-                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER_O,
-                        params.getServerId().getXRoadInstance())
-                        .setReadOnly(false),
 
                 // Member code
                 new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN, "")
-                        .setReadOnly(true),*/
+                        .setReadOnly(true),
 
                 // Instance identifier
-                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER,
+                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER_O,
                     params.getServerId().getXRoadInstance()
                 ).setReadOnly(true),
 

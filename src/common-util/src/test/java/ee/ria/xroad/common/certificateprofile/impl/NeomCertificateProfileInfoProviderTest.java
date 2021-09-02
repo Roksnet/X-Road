@@ -174,16 +174,11 @@ public class NeomCertificateProfileInfoProviderTest {
     @Test
     public void authProfileSubjectFields() {
         DnFieldDescription[] expectedFields = {
-                /*new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
-                        .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER_O, "XX")
+                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
                         .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN, "")
                         .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE,
-                        "server"
-                        ).setReadOnly(true),*/
-                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER, "XX")
+                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER_O, "XX")
                         .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE, "server")
                         .setReadOnly(true),
@@ -204,7 +199,7 @@ public class NeomCertificateProfileInfoProviderTest {
     @Test
     public void authProfileValidateFieldSuccessfully() throws Exception {
         getAuthProfile().validateSubjectField(
-                new DnFieldValueImpl("C", "XX")
+                new DnFieldValueImpl("O", "XX")
         );
     }
 
@@ -217,7 +212,7 @@ public class NeomCertificateProfileInfoProviderTest {
     @Test(expected = Exception.class)
     public void authProfileFailToValidateUnknownField() throws Exception {
         getAuthProfile().validateSubjectField(
-                new DnFieldValueImpl("O", "foo")
+                new DnFieldValueImpl("X", "foo")
         );
     }
 
@@ -240,12 +235,11 @@ public class NeomCertificateProfileInfoProviderTest {
     @Test
     public void authProfileCreateSubjectDn() {
         assertEquals(
-                new X500Principal("C=XX, O=foo, CN=baz"),
+                new X500Principal("O=XX, CN=foo"),
                 getAuthProfile().createSubjectDn(
                         new DnFieldValue[] {
-                                new DnFieldValueImpl("C", "XX"),
-                                new DnFieldValueImpl("O", "foo"),
-                                new DnFieldValueImpl("CN", "baz")
+                                new DnFieldValueImpl("O", "XX"),
+                                new DnFieldValueImpl("CN", "foo")
                         }
                 )
         );
