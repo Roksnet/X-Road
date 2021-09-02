@@ -79,21 +79,8 @@ public class NeomCertificateProfileInfoProviderTest {
         DnFieldDescription[] expectedFields = {
                 new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.ORGANIZATION_NAME_CN, "")
                         .setReadOnly(true),
-
-                /*new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
-                        .setReadOnly(true),*/
-
-                /*new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER_O, "XX")
+                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
                         .setReadOnly(true),
-
-                new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BIZ,
-                        "foo"
-                        ).setReadOnly(true),
-                
-                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
-                        "bar"
-                        ).setReadOnly(true),*/
-
                 new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER, "XX")
                         .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BIZ, "foo")
@@ -171,7 +158,7 @@ public class NeomCertificateProfileInfoProviderTest {
     public void signProfileGetSubjectIdentifier() {
         X509Certificate mockCert = Mockito.mock(X509Certificate.class);
         Mockito.when(mockCert.getSubjectX500Principal()).thenReturn(
-                new X500Principal("CN=mock, O=XX, businessCategory=Foo, serialNumber=bar")
+                new X500Principal("CN=mock, C=YY, O=XX, businessCategory=Foo, serialNumber=bar")
         );
 
         assertEquals(
