@@ -45,12 +45,12 @@ public class NeomSignCertificateProfileInfo extends AbstractCertificateProfileIn
      */
     public NeomSignCertificateProfileInfo(Parameters params) {
         super(new DnFieldDescription[] {
-
-                /*new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.ORGANIZATION_NAME_CN, "")
+                // Org name
+                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.ORGANIZATION_NAME_CN, "")
                         .setReadOnly(true),
 
                 // Country Code
-                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
+                /*new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE, "")
                         .setReadOnly(true),
 
                 // Instance
