@@ -45,7 +45,7 @@ public class GenericSignCertificateProfileInfo
      * Constructor.
      * @param params the parameters
      */
-    public genericSignCertificateProfileInfo(Parameters params) {
+    public GenericSignCertificateProfileInfo(Parameters params) {
         super(new DnFieldDescription[] {
                 // Instance identifier
                 new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER,
