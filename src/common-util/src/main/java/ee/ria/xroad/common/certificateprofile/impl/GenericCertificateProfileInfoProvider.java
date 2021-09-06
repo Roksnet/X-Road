@@ -34,12 +34,11 @@ import ee.ria.xroad.common.certificateprofile.SignCertificateProfileInfo;
 import ee.ria.xroad.common.identifier.ClientId;
 import ee.ria.xroad.common.util.CertUtils;
 
-import javax.security.auth.x500.X500Principal;
-
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.BCStyle;
 
 import java.security.cert.X509Certificate;
+import javax.security.auth.x500.X500Principal;
 
 /**
  * Generic certificate profile
@@ -63,7 +62,7 @@ public class GenericCertificateProfileInfoProvider
      * CN = serverCode
      * C = country
      * serialNumber = memberCode
-     * O = member
+     * O = memberName
      */
     private static class GenericAuthCertificateProfileInfo extends AbstractCertificateProfileInfo
             implements AuthCertificateProfileInfo {
@@ -75,7 +74,7 @@ public class GenericCertificateProfileInfoProvider
                         .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("SN", DnFieldLabelLocalizationKey.MEMBER_CODE,
                         params.getServerId().getMemberCode())
-                        .setReadOnly(true), 
+                        .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME,
                         params.getMemberName())
                         .setReadOnly(true)}
