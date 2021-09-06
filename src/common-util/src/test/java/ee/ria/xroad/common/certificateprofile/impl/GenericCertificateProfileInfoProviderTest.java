@@ -56,7 +56,7 @@ public class GenericCertificateProfileInfoProviderTest {
                         "XX"
                         ).setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME,
-                        "foo"
+                        "abc"
                         ).setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BC,
                         "bar"
@@ -116,11 +116,11 @@ public class GenericCertificateProfileInfoProviderTest {
     @Test
     public void signProfileCreateSubjectDn() {
         assertEquals(
-                new X500Principal("CN=foo, O=bar, businessCategory=bar, serialNumber=baz"),
+                new X500Principal("CN=XX, O=abc, businessCategory=bar, serialNumber=baz"),
                 getSignProfile().createSubjectDn(
                         new DnFieldValue[] {
-                                new DnFieldValueImpl("CN", "foo"),
-                                new DnFieldValueImpl("O", "bar"),
+                                new DnFieldValueImpl("CN", "XX"),
+                                new DnFieldValueImpl("O", "abc"),
                                 new DnFieldValueImpl("businessCategory", "bar"),
                                 new DnFieldValueImpl("serialNumber", "baz")
                         }
