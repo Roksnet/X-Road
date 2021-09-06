@@ -52,14 +52,18 @@ public class GenericCertificateProfileInfoProviderTest {
     @Test
     public void signProfileSubjectFields() {
         DnFieldDescription[] expectedFields = {
-                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.ORGANIZATION_NAME_CN, "XX")
-                        .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, "foo")
-                        .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BC, "bar")
-                        .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN, "baz")
-                        .setReadOnly(true)
+                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.ORGANIZATION_NAME_CN,
+                        "XX"
+                        ).setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME,
+                        "foo"
+                        ).setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BC,
+                        "bar"
+                        ).setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
+                        "baz"
+                        ).setReadOnly(true)
         };
 
         assertTrue(
@@ -130,12 +134,15 @@ public class GenericCertificateProfileInfoProviderTest {
     @Test
     public void authProfileSubjectFields() {
         DnFieldDescription[] expectedFields = {
-                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE, "server")
-                        .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("SN", DnFieldLabelLocalizationKey.MEMBER_CODE_SN, "foo")
-                        .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, "bar")
-                        .setReadOnly(true)
+                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE,
+                        "server"
+                        ).setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("SN", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
+                        "foo"
+                        ).setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME,
+                        "bar"
+                        ).setReadOnly(true)
         };
 
         assertTrue(
