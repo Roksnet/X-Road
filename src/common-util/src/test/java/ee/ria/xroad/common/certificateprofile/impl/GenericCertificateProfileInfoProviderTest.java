@@ -217,7 +217,7 @@ public class GenericCertificateProfileInfoProviderTest {
         return provider().getSignCertProfile(new SignCertificateProfileInfo.Parameters() {
             @Override
             public ClientId getClientId() {
-                return ClientId.create("XX", "foo", "bar");
+                return ClientId.create("XX", "bar", "baz");
             }
 
             @Override
