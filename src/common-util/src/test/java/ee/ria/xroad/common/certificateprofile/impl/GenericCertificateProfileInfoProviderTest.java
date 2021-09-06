@@ -25,15 +25,18 @@
  */
 package ee.ria.xroad.common.certificateprofile.impl;
 
+import ee.ria.xroad.common.certificateprofile.AuthCertificateProfileInfo;
 import ee.ria.xroad.common.certificateprofile.CertificateProfileInfoProvider;
 import ee.ria.xroad.common.certificateprofile.DnFieldDescription;
 import ee.ria.xroad.common.certificateprofile.DnFieldValue;
+import ee.ria.xroad.common.certificateprofile.SignCertificateProfileInfo;
 import ee.ria.xroad.common.identifier.ClientId;
 import ee.ria.xroad.common.identifier.SecurityServerId;
 
 import org.bouncycastle.util.Arrays;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.quartz.spi.InstanceIdGenerator;
 
 import javax.security.auth.x500.X500Principal;
 
@@ -48,41 +51,18 @@ import static org.junit.Assert.assertTrue;
 public class GenericCertificateProfileInfoProviderTest {
 
     /**
-     * Tests whether provider returns correct implementation as expected.
-     */
-    @Test
-    public void providerReturnsCorrectImplementations() {
-        CertificateProfileInfoProvider provider = provider();
-        assertTrue(
-                "Must return instance of GenericAuthCertificateProfileInfo",
-                provider.getAuthCertProfile(
-                        new AuthCertificateProfileInfoParameters(
-                                SecurityServerId.create("XX", "foo", "bar", "server"), "foo"
-                        )
-                ) instanceof GenericAuthCertificateProfileInfo
-        );
-
-        assertTrue(
-                "Must return instance of GenericSignCertificateProfileInfo",
-                provider.getSignCertProfile(
-                        new SignCertificateProfileInfoParameters(
-                                ClientId.create("XX", "foo", "bar"), "foo"
-                        )
-                ) instanceof GenericSignCertificateProfileInfo
-        );
-    }
-
-    /**
      * Tests whether getting expected subject fields succeeds as expected.
      */
     @Test
     public void signProfileSubjectFields() {
         DnFieldDescription[] expectedFields = {
-                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER, "XX")
+                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.ORGANIZATION_NAME_CN, "XX")
                         .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.MEMBER_CLASS, "foo")
+                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, "foo")
                         .setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.MEMBER_CODE, "bar")
+                new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BC, "bar")
+                        .setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN, "baz")
                         .setReadOnly(true)
         };
 
@@ -117,7 +97,7 @@ public class GenericCertificateProfileInfoProviderTest {
     }
 
     /**
-     * Tests whether validating black subject field of sign profile fails
+     * Tests whether validating blank subject field of sign profile fails
      * as expected.
      *
      * @throws Exception in case of any unexpected errors
@@ -125,7 +105,7 @@ public class GenericCertificateProfileInfoProviderTest {
     @Test(expected = Exception.class)
     public void signProfileFailToValidateBlankField() throws Exception {
         getSignProfile().validateSubjectField(
-                new DnFieldValueImpl("O", "")
+                new DnFieldValueImpl("serialNumber", "")
         );
     }
 
@@ -135,31 +115,15 @@ public class GenericCertificateProfileInfoProviderTest {
     @Test
     public void signProfileCreateSubjectDn() {
         assertEquals(
-                new X500Principal("C=foo, O=bar, CN=baz"),
+                new X500Principal("CN=foo, O=bar, businessCategory=bar, serialNumber=baz"),
                 getSignProfile().createSubjectDn(
                         new DnFieldValue[] {
-                                new DnFieldValueImpl("C", "foo"),
+                                new DnFieldValueImpl("CN", "foo"),
                                 new DnFieldValueImpl("O", "bar"),
-                                new DnFieldValueImpl("CN", "baz")
+                                new DnFieldValueImpl("businessCategory", "bar"),
+                                new DnFieldValueImpl("serialNumber", "baz")
                         }
                 )
-        );
-    }
-
-    /**
-     * Tests whether getting subject identifier of sign profile succeeds
-     * as expected.
-     */
-    @Test
-    public void signProfileGetSubjectIdentifier() {
-        X509Certificate mockCert = Mockito.mock(X509Certificate.class);
-        Mockito.when(mockCert.getSubjectX500Principal()).thenReturn(
-                new X500Principal("C=XX, O=Foo, CN=bar")
-        );
-
-        assertEquals(
-                ClientId.create("XX", "Foo", "bar"),
-                getSignProfile().getSubjectIdentifier(mockCert)
         );
     }
 
@@ -170,10 +134,12 @@ public class GenericCertificateProfileInfoProviderTest {
     @Test
     public void authProfileSubjectFields() {
         DnFieldDescription[] expectedFields = {
-                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.INSTANCE_IDENTIFIER, "XX")
-                        .setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE, "server")
                         .setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("SN", DnFieldLabelLocalizationKey.MEMBER_CODE_SN, "foo")
+                        .setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME, "bar")
+                        .setReadOnly(true)
         };
 
         assertTrue(
@@ -191,7 +157,7 @@ public class GenericCertificateProfileInfoProviderTest {
     @Test
     public void authProfileValidateFieldSuccessfully() throws Exception {
         getAuthProfile().validateSubjectField(
-                new DnFieldValueImpl("C", "XX")
+                new DnFieldValueImpl("O", "bar")
         );
     }
 
@@ -204,7 +170,7 @@ public class GenericCertificateProfileInfoProviderTest {
     @Test(expected = Exception.class)
     public void authProfileFailToValidateUnknownField() throws Exception {
         getAuthProfile().validateSubjectField(
-                new DnFieldValueImpl("O", "foo")
+                new DnFieldValueImpl("X", "foo")
         );
     }
 
@@ -227,11 +193,12 @@ public class GenericCertificateProfileInfoProviderTest {
     @Test
     public void authProfileCreateSubjectDn() {
         assertEquals(
-                new X500Principal("C=foo, CN=baz"),
+                new X500Principal("CN=server, SN=foo, O=bar"),
                 getAuthProfile().createSubjectDn(
                         new DnFieldValue[] {
-                                new DnFieldValueImpl("C", "foo"),
-                                new DnFieldValueImpl("CN", "baz")
+                                new DnFieldValueImpl("CN", "server"),
+                                new DnFieldValueImpl("SN", "foo"),
+                                new DnFieldValueImpl("O", "bar"),
                         }
                 )
         );
@@ -243,21 +210,36 @@ public class GenericCertificateProfileInfoProviderTest {
         return new GenericCertificateProfileInfoProvider();
     }
 
-    private GenericSignCertificateProfileInfo getSignProfile() {
-        return new GenericSignCertificateProfileInfo(
-                new SignCertificateProfileInfoParameters(
-                        ClientId.create("XX", "foo", "bar"),
-                        "foo"
-                )
-        );
+    private SignCertificateProfileInfo getSignProfile() {
+        return provider().getSignCertProfile(new SignCertificateProfileInfo.Parameters() {
+            @Override
+            public ClientId getClientId() {
+                return ClientId.create("XX", "foo", "bar");
+            }
+
+            @Override
+            public String getMemberName() {
+                return "foobar";
+            }
+
+            @Override
+            public SecurityServerId getServerId() {
+                return null;
+            }
+        });
     }
 
-    private GenericAuthCertificateProfileInfo getAuthProfile() {
-        return new GenericAuthCertificateProfileInfo(
-                new AuthCertificateProfileInfoParameters(
-                        SecurityServerId.create("XX", "foo", "bar", "server"),
-                        "foo"
-                )
-        );
+    private AuthCertificateProfileInfo getAuthProfile() {
+        return provider().getAuthCertProfile(new AuthCertificateProfileInfo.Parameters() {
+            @Override
+            public SecurityServerId getServerId() {
+                return SecurityServerId.create("XX", "foo", "bar", "server");
+            }
+
+            @Override
+            public String getMemberName() {
+                return "foobar";
+            }
+        });
     }
 }
