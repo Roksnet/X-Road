@@ -81,7 +81,7 @@ public class GenericCertificateProfileInfoProviderTest {
     @Test
     public void signProfileValidateFieldSuccessfully() throws Exception {
         getSignProfile().validateSubjectField(
-                new DnFieldValueImpl("C", "XX")
+                new DnFieldValueImpl("CN", "XX")
         );
     }
 
@@ -138,7 +138,7 @@ public class GenericCertificateProfileInfoProviderTest {
                 new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE,
                         "server"
                         ).setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("SN", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
+                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
                         "foo"
                         ).setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME,
@@ -197,11 +197,11 @@ public class GenericCertificateProfileInfoProviderTest {
     @Test
     public void authProfileCreateSubjectDn() {
         assertEquals(
-                new X500Principal("CN=server, SN=foo, O=bar"),
+                new X500Principal("CN=server, serialNumber=foo, O=bar"),
                 getAuthProfile().createSubjectDn(
                         new DnFieldValue[] {
                                 new DnFieldValueImpl("CN", "server"),
-                                new DnFieldValueImpl("SN", "foo"),
+                                new DnFieldValueImpl("serialNumber", "foo"),
                                 new DnFieldValueImpl("O", "bar"),
                         }
                 )
