@@ -4,17 +4,17 @@
  * Copyright (c) 2018 Estonian Information System Authority (RIA),
  * Nordic Institute for Interoperability Solutions (NIIS), Population Register Centre (VRK)
  * Copyright (c) 2015-2017 Estonian Information System Authority (RIA), Population Register Centre (VRK)
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,14 +25,9 @@
  */
 package ee.ria.xroad.common.certificateprofile.impl;
 
-import ee.ria.xroad.common.certificateprofile.AuthCertificateProfileInfo;
-import ee.ria.xroad.common.certificateprofile.CertificateProfileInfoProvider;
-import ee.ria.xroad.common.certificateprofile.DnFieldDescription;
-import ee.ria.xroad.common.certificateprofile.DnFieldValue;
-import ee.ria.xroad.common.certificateprofile.SignCertificateProfileInfo;
+import ee.ria.xroad.common.certificateprofile.*;
 import ee.ria.xroad.common.identifier.ClientId;
 import ee.ria.xroad.common.identifier.SecurityServerId;
-
 import org.bouncycastle.util.Arrays;
 import org.junit.Test;
 
@@ -53,20 +48,18 @@ public class GenericCertificateProfileInfoProviderTest {
     public void signProfileSubjectFields() {
         DnFieldDescription[] expectedFields = {
                 new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.ORGANIZATION_NAME_CN,
-                        "XX"
-                        ).setReadOnly(true),
+                        "foobar"
+                ).setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME,
-                        "abc"
-                        ).setReadOnly(true),
+                        "foobar"
+                ).setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BC,
                         "bar"
-                        ).setReadOnly(true),
+                ).setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
                         "baz"
-                        ).setReadOnly(true)
+                ).setReadOnly(true)
         };
-        System.out.println(expectedFields);
-        System.out.println(getSignProfile().getSubjectFields());
         assertTrue(
                 "Did not get expected fields",
                 Arrays.areEqual(expectedFields, getSignProfile().getSubjectFields())
@@ -115,17 +108,15 @@ public class GenericCertificateProfileInfoProviderTest {
      */
     @Test
     public void signProfileCreateSubjectDn() {
-        assertEquals(
-                new X500Principal("CN=XX, O=abc, businessCategory=bar, serialNumber=baz"),
-                getSignProfile().createSubjectDn(
-                        new DnFieldValue[] {
-                                new DnFieldValueImpl("CN", "XX"),
-                                new DnFieldValueImpl("O", "abc"),
-                                new DnFieldValueImpl("businessCategory", "bar"),
-                                new DnFieldValueImpl("serialNumber", "baz")
-                        }
-                )
+        X500Principal x500PrincipalTest = new X500Principal("CN=XX, O=abc, serialNumber=baz");
+        X500Principal x500PrincipalReal = getSignProfile().createSubjectDn(
+                new DnFieldValue[]{
+                        new DnFieldValueImpl("CN", "XX"),
+                        new DnFieldValueImpl("O", "abc"),
+                        new DnFieldValueImpl("serialNumber", "baz")
+                }
         );
+        assertEquals(x500PrincipalTest, x500PrincipalReal);
     }
 
     /**
@@ -137,15 +128,14 @@ public class GenericCertificateProfileInfoProviderTest {
         DnFieldDescription[] expectedFields = {
                 new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE,
                         "server"
-                        ).setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
-                        "foo"
-                        ).setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME,
+                ).setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE,
                         "bar"
-                        ).setReadOnly(true)
+                ).setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME,
+                        "foobar"
+                ).setReadOnly(true)
         };
-
         assertTrue(
                 "Did not get expected fields",
                 Arrays.areEqual(expectedFields, getAuthProfile().getSubjectFields())
@@ -199,7 +189,7 @@ public class GenericCertificateProfileInfoProviderTest {
         assertEquals(
                 new X500Principal("CN=server, serialNumber=foo, O=bar"),
                 getAuthProfile().createSubjectDn(
-                        new DnFieldValue[] {
+                        new DnFieldValue[]{
                                 new DnFieldValueImpl("CN", "server"),
                                 new DnFieldValueImpl("serialNumber", "foo"),
                                 new DnFieldValueImpl("O", "bar"),

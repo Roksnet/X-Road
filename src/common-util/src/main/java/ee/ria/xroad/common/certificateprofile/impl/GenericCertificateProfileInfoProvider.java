@@ -67,7 +67,7 @@ public class GenericCertificateProfileInfoProvider
      */
     private static class GenericAuthCertificateProfileInfo extends AbstractCertificateProfileInfo
             implements AuthCertificateProfileInfo {
-        
+
         GenericAuthCertificateProfileInfo(AuthCertificateProfileInfo.Parameters params) {
             super(new DnFieldDescription[] {
                 new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE,
@@ -87,15 +87,15 @@ public class GenericCertificateProfileInfoProvider
      *
      * CN = memberName
      * O = memberName
-     * businesssCategory = memberClass
+     * businessCategory = memberClass
      * C = country
      * serialNumber = memberCode
      */
     private static class GenericSignCertificateProfileInfo extends AbstractCertificateProfileInfo
             implements SignCertificateProfileInfo {
-        
+
         private final String instanceIdentifier;
-        
+
         GenericSignCertificateProfileInfo(SignCertificateProfileInfo.Parameters params) {
             super(new DnFieldDescription[] {
 
