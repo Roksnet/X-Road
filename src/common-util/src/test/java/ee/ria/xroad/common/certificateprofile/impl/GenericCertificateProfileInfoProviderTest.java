@@ -65,8 +65,6 @@ public class GenericCertificateProfileInfoProviderTest {
                         "baz"
                         ).setReadOnly(true)
         };
-        System.out.println(expectedFields);
-        System.out.println(getSignProfile().getSubjectFields());
         assertTrue(
                 "Did not get expected fields",
                 Arrays.areEqual(expectedFields, getSignProfile().getSubjectFields())

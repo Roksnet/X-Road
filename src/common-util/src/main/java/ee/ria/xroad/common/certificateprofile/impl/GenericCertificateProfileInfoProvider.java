@@ -87,7 +87,7 @@ public class GenericCertificateProfileInfoProvider
      *
      * CN = memberName
      * O = memberName
-     * businesssCategory = memberClass
+     * businessCategory = memberClass  
      * C = country
      * serialNumber = memberCode
      */
