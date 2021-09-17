@@ -116,11 +116,12 @@ public class GenericCertificateProfileInfoProviderTest {
      */
     @Test
     public void signProfileCreateSubjectDn() {
-        X500Principal x500PrincipalTest = new X500Principal("CN=XX, O=abc, serialNumber=baz");
+        X500Principal x500PrincipalTest = new X500Principal("CN=XX, O=abc, C=a, serialNumber=baz");
         X500Principal x500PrincipalReal = getSignProfile().createSubjectDn(
                 new DnFieldValue[]{
                         new DnFieldValueImpl("CN", "XX"),
                         new DnFieldValueImpl("O", "abc"),
+                        new DnFieldValueImpl("C", "a"),
                         new DnFieldValueImpl("serialNumber", "baz")
                 }
         );
@@ -198,11 +199,12 @@ public class GenericCertificateProfileInfoProviderTest {
     @Test
     public void authProfileCreateSubjectDn() {
         assertEquals(
-                new X500Principal("CN=server, serialNumber=foo, O=bar"),
+                new X500Principal("CN=server, serialNumber=foo, C=a, O=bar"),
                 getAuthProfile().createSubjectDn(
                         new DnFieldValue[]{
                                 new DnFieldValueImpl("CN", "server"),
                                 new DnFieldValueImpl("serialNumber", "foo"),
+                                new DnFieldValueImpl("C", "a"),
                                 new DnFieldValueImpl("O", "bar"),
                         }
                 )
