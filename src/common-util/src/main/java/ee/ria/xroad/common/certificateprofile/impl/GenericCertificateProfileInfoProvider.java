@@ -111,6 +111,9 @@ public class GenericCertificateProfileInfoProvider
                 new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BC,
                         params.getClientId().getMemberClass())
                         .setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE,
+                        "")
+                        .setReadOnly(false),
                 new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
                         params.getClientId().getMemberCode())
                         .setReadOnly(true) }

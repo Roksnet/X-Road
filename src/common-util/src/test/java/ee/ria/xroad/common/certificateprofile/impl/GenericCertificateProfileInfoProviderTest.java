@@ -61,6 +61,9 @@ public class GenericCertificateProfileInfoProviderTest {
                 new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BC,
                         "bar"
                 ).setReadOnly(true),
+                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE,
+                        ""
+                ).setReadOnly(false),
                 new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
                         "baz"
                 ).setReadOnly(true)
