@@ -138,7 +138,7 @@ public class GenericCertificateProfileInfoProviderTest {
                         "bar"
                 ).setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE,
-                        "a"
+                        ""
                 ).setReadOnly(true),
                 new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME,
                         "foobar"
