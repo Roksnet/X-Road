@@ -61,9 +61,6 @@ public class GenericCertificateProfileInfoProviderTest {
                 new EnumLocalizedFieldDescriptionImpl("businessCategory", DnFieldLabelLocalizationKey.MEMBER_CLASS_BC,
                         "bar"
                 ).setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE,
-                        "a"
-                ).setReadOnly(false),
                 new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
                         "baz"
                 ).setReadOnly(true)
@@ -116,12 +113,11 @@ public class GenericCertificateProfileInfoProviderTest {
      */
     @Test
     public void signProfileCreateSubjectDn() {
-        X500Principal x500PrincipalTest = new X500Principal("CN=XX, O=abc, C=a, serialNumber=baz");
+        X500Principal x500PrincipalTest = new X500Principal("CN=XX, O=abc, serialNumber=baz");
         X500Principal x500PrincipalReal = getSignProfile().createSubjectDn(
                 new DnFieldValue[]{
                         new DnFieldValueImpl("CN", "XX"),
                         new DnFieldValueImpl("O", "abc"),
-                        new DnFieldValueImpl("C", "a"),
                         new DnFieldValueImpl("serialNumber", "baz")
                 }
         );
@@ -141,9 +137,6 @@ public class GenericCertificateProfileInfoProviderTest {
                 new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
                         "bar"
                 ).setReadOnly(true),
-                new EnumLocalizedFieldDescriptionImpl("C", DnFieldLabelLocalizationKey.COUNTRY_CODE,
-                        "a"
-                ).setReadOnly(false),
                 new EnumLocalizedFieldDescriptionImpl("O", DnFieldLabelLocalizationKey.ORGANIZATION_NAME,
                         "foobar"
                 ).setReadOnly(true)
@@ -199,12 +192,11 @@ public class GenericCertificateProfileInfoProviderTest {
     @Test
     public void authProfileCreateSubjectDn() {
         assertEquals(
-                new X500Principal("CN=server, serialNumber=foo, C=a, O=bar"),
+                new X500Principal("CN=server, serialNumber=foo, O=bar"),
                 getAuthProfile().createSubjectDn(
                         new DnFieldValue[]{
                                 new DnFieldValueImpl("CN", "server"),
                                 new DnFieldValueImpl("serialNumber", "foo"),
-                                new DnFieldValueImpl("C", "a"),
                                 new DnFieldValueImpl("O", "bar"),
                         }
                 )
