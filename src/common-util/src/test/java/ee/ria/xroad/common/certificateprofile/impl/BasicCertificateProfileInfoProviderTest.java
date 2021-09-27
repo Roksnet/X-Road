@@ -135,7 +135,7 @@ public class BasicCertificateProfileInfoProviderTest {
     public void authProfileSubjectFields() {
         DnFieldDescription[] expectedFields = {
                 new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_DNS_NAME,
-                        "server"
+                        ""
                 ).setReadOnly(false),
                 new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
                         "bar"
@@ -188,7 +188,7 @@ public class BasicCertificateProfileInfoProviderTest {
     @Test(expected = Exception.class)
     public void authProfileFailToValidateBlankField() throws Exception {
         getAuthProfile().validateSubjectField(
-                new DnFieldValueImpl("CN", "")
+                new DnFieldValueImpl("serialNumber", "")
         );
     }
 
