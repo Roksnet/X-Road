@@ -42,9 +42,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Tests the Generic implementation of CertificateProfileInfoProvider.
+ * Tests the Basic implementation of CertificateProfileInfoProvider.
  */
-public class GenericCertificateProfileInfoProviderTest {
+public class BasicCertificateProfileInfoProviderTest {
 
     /**
      * Tests whether getting expected subject fields succeeds as expected.
@@ -134,9 +134,9 @@ public class GenericCertificateProfileInfoProviderTest {
     @Test
     public void authProfileSubjectFields() {
         DnFieldDescription[] expectedFields = {
-                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_CODE,
+                new EnumLocalizedFieldDescriptionImpl("CN", DnFieldLabelLocalizationKey.SERVER_DNS_NAME,
                         "server"
-                ).setReadOnly(true),
+                ).setReadOnly(false),
                 new EnumLocalizedFieldDescriptionImpl("serialNumber", DnFieldLabelLocalizationKey.MEMBER_CODE_SN,
                         "bar"
                 ).setReadOnly(true),
@@ -212,7 +212,7 @@ public class GenericCertificateProfileInfoProviderTest {
     // ------------------------------------------------------------------------
 
     private CertificateProfileInfoProvider provider() {
-        return new GenericCertificateProfileInfoProvider();
+        return new BasicCertificateProfileInfoProvider();
     }
 
     private SignCertificateProfileInfo getSignProfile() {
