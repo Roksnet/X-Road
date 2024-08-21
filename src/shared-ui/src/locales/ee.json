@@ -1,0 +1,72 @@
+{
+  "locals_demo": "This is localised in library",
+  "type": "Tüüp",
+  "warning": "Hoiatus",
+  "fields": {
+    "password": "Salasõna",
+    "username": "LIB-kasutaja",
+    "shared": "sharedlib",
+    "code": "Kood",
+    "description": "Kirjeldus"
+  },
+  "action": {
+    "cancel": "Lõpeta",
+    "add": "Lisa",
+    "yes": "Jah",
+    "delete": "Kustuta",
+    "download": "Lae alla",
+    "upload": "Lae üles",
+    "restore": "Taasta"
+  },
+  "noData": {
+    "noMatches": "Ei leitud vastavalt kriteeriumile",
+    "loading": "laadib... Palun oota"
+  },
+  "keys": {
+    "gotIt": "Sain"
+  },
+  "global": {
+    "all": "Kõik",
+    "name": "Nimi"
+  },
+  "backup": {
+    "deleteBackup": {
+      "dialog": {
+        "confirmation": "Kas sa oled kindel et tahad kustutada faili {file}?",
+        "title": "Oled kindel?"
+      },
+      "success": "Fail {file} kustutatud"
+    },
+    "restoreFromBackup": {
+      "dialog": {
+        "confirmation": "Oled kindel et tahad taastada failist {file}?",
+        "title": "Oled kindel?"
+      },
+      "success": "Konfiguratsioon taastatud failist {file}"
+    },
+    "createBackup": {
+      "button": "Salvesta konfiguratsioon.",
+      "messages": {
+        "success": "Taaste fail {file} edukalt loodud",
+        "localConfWarning": "Warning! The file “/etc/xroad/services/local.conf” used for configuration overrides is deprecated and not included in the backups anymore. The file “/etc/xroad/services/local.properties” should be used instead."
+      }
+    },
+    "uploadBackup": {
+      "button": "Lae taaste fail",
+      "confirmationDialog": {
+        "confirmation": "Fail {name} Juba on olemas, kas soovid ülekirjutada?",
+        "title": "Fail eksiteerib"
+      },
+      "success": "Taaste fail {file} edukalt üles laetud"
+    }
+  },
+  "validationError": {
+    "ValidHostAddress": "Valid fully qualified domain name (e.g. host.example.org) or public IP address (eg. 192.168.123.123) needed",
+    "ValidHostAddressField": "Valid IP address or fully qualified domain name needed"
+  },
+  "validation": {
+    "messages": {
+      "address" : "The {field} field contains invalid characters"
+    }
+  }
+}
