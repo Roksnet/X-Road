@@ -13,10 +13,25 @@ RUN apt-get -qq update \
   && apt-get -qq autoremove \
   && apt-get -qq clean
 
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+  RUN add-apt-repository \
+     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+     $(lsb_release -cs) \
+     stable"
+
+  RUN apt-get -y update && \
+   apt-get -y install \
+     docker-ce \
+     docker-ce-cli \
+     containerd.io
+
 ARG uid=1000
 ARG gid=1000
+ARG DOCKERGID
 
-RUN groupadd -o -g $gid builder && useradd -m -u $uid -g $gid builder \
+# Setup users and groups
+RUN groupmod -g ${DOCKERGID} docker
+RUN groupadd -o -g $gid builder && useradd -m -u $uid -g $gid -G ${DOCKERGID} builder \
   && mkdir -p /mnt/gradle-cache && chown -R builder:builder /mnt/gradle-cache
 
 USER builder
