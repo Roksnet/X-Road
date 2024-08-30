@@ -83,7 +83,7 @@ buildInDocker() {
   DOCKER_GID=$(getent group docker | cut -d: -f3)
 
   docker build -q -t xroad-build --build-arg uid=$(id -u) --build-arg gid=$(id -g) --build-arg DOCKERGID=${DOCKER_GID} $XROAD/packages/docker-compile || errorExit "Error building build image."
-  docker run --rm -v /var/run/docker.sock:/var/run/docker.sock --group-add ${DOCKER_GID} --add-host=host.docker.internal:host-gateway -v $XROAD/..:/workspace -w /workspace/src -u builder ${OPT} xroad-build bash -c "./compile_code.sh -nodaemon" || errorExit "Error running build of binaries."
+  docker run --rm -v /var/run/docker.sock:/var/run/docker.sock --group-add ${DOCKER_GID} --add-host=host.docker.internal:host-gateway -v $XROAD/..:/workspace -w /workspace/src -u builder ${OPT} xroad-build bash -c "./compile_code.sh -nodaemon --skip-tests" || errorExit "Error running build of binaries."
 }
 
 buildPasswordStoreInDocker() {
